@@ -10,6 +10,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { useNavigate } from "react-router-dom";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const headCells = [
   {
@@ -71,6 +72,7 @@ const langOptions = [
 
 function HomePage() {
   const [jokesData, setJokesData] = useState([]);
+  const [showLoader, setShowLoader] = useState(false);
   const navigate = useNavigate();
   const [jokesAmountValue, setJokesAmountValue] = useState(4);
   const [jokeLang, setJokeLang] = useState("en");
@@ -131,13 +133,14 @@ function HomePage() {
   };
 
   useEffect(() => {
+    setShowLoader(true);
     fetch(
       `https://v2.jokeapi.dev/joke/Any?lang=${jokeLang}&blacklistFlags=nsfw,sexist&amount=${jokesAmountValue}`
     )
       .then((response) => response.json())
       .then((json) => {
-        console.log("json.jokes"), json.jokes;
         setJokesData(json.jokes);
+        setShowLoader(false);
       });
   }, [jokesAmountValue, jokeLang]);
 
@@ -256,7 +259,15 @@ function HomePage() {
           </Form>
         </div>
         <div className="p-3">
-          {!defaultView ? bootstrapTablUi() : muiTableUi()}
+          {showLoader ? (
+            <div className="d-flex justify-content-center align-items-center p-3">
+              <CircularProgress />
+            </div>
+          ) : !defaultView ? (
+            bootstrapTablUi()
+          ) : (
+            muiTableUi()
+          )}
         </div>
         <div className="d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center  p-2">
           <p>
