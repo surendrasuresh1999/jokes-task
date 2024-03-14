@@ -7,9 +7,17 @@ body {
   min-width: 250px;
 }
 
+.title {
+  font-size: 16px;
+}
+
 /* medium mobile screen break point according to chrom inspection tools */
 @media screen and (min-width: 400px) {
   .login-form {
     min-width: 350px;
+  }
+
+  .title {
+    font-size: 26px;
   }
 }

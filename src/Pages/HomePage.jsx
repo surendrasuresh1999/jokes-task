@@ -224,7 +224,7 @@ function HomePage() {
         {/* heading of the task */}
         <div className="p-4">
           <h1
-            className="fs-3 text-center"
+            className="title text-center"
             style={{ textDecoration: "underline" }}
           >
             MobileFirst Applications (React Developer Task){" "}
@@ -258,15 +258,20 @@ function HomePage() {
         <div className="p-3">
           {!defaultView ? bootstrapTablUi() : muiTableUi()}
         </div>
-        <div className="d-flex justify-content-between align-items-center p-2">
+        <div className="d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center  p-2">
           <p>
             <b>Note:</b> We can add multiple filters but for now i am providing
             these two filters
           </p>
-          <button className="btn btn-outline-primary" onClick={()=>{
-            localStorage.removeItem('userData')
-            navigate('/login')
-            }}>Logout</button>
+          <button
+            className="btn btn-outline-primary"
+            onClick={() => {
+              localStorage.removeItem("userData");
+              navigate("/login");
+            }}
+          >
+            Logout
+          </button>
         </div>
       </div>
     </div>
